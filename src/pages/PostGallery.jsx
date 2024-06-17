@@ -4,9 +4,12 @@ import Button from '../components/Button';
 import { usePosts } from '../contexts/PostContext';
 
 const PostGallery = () => {
-  const { data } = usePosts();
+  const { data, currentPost, deselectPost } = usePosts();
   const number = data?.length;
   document.title = 'Meiersbook | All posts';
+
+  // To prevent load undefined posts when clicking in
+  if (currentPost === undefined || currentPost.length !== 0) deselectPost();
 
   return (
     <>
@@ -21,9 +24,12 @@ const PostGallery = () => {
         </h1>
       </div>
       <div className="card-container">
-        {data?.map((post) => (
-          <Card post={post} key={post.id} />
-        ))}
+        {data
+          ?.slice()
+          .sort((a, b) => +a.title - b.title)
+          .map((post) => (
+            <Card post={post} key={post.id} />
+          ))}
       </div>
     </>
   );

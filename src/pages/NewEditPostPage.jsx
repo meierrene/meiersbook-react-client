@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import { usePosts } from '../contexts/PostContext';
 
 const NewEditPostPage = () => {
-  const { currentPost, createPost, editPost, deselectPost } = usePosts();
+  const { currentPost, createPost, editPost } = usePosts();
   const [previewImage, setPreviewImage] = useState(
     currentPost.image ? currentPost.image : null
   );
@@ -84,9 +84,7 @@ const NewEditPostPage = () => {
         </div>
         <div className="buttons-nav">
           <Link to="/">
-            <Button level="secondary" onClick={deselectPost}>
-              Go back
-            </Button>
+            <Button level="secondary">Go back</Button>
           </Link>
           <Button level="primary" disabled={!imageData.name && !currentPost.id}>
             {currentPost.id ? 'Update' : 'Publish'}

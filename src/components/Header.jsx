@@ -2,22 +2,15 @@ import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import ThemeToggler from './ThemeToggler';
 import Button from './Button';
-import { usePosts } from '../contexts/PostContext';
 
 const Header = () => {
-  const { deselectPost } = usePosts();
-
   return (
     <header className={styles.header}>
       <nav
         className={`${styles.navbar} navbar navbar-expand-lg container-fluid`}
         data-bs-theme="dark"
       >
-        <Link
-          className={`navbar-brand ${styles.logo}`}
-          to="/"
-          onClick={deselectPost}
-        >
+        <Link className={`navbar-brand ${styles.logo}`} to="/">
           📖 MeiersBook
         </Link>
         <button
