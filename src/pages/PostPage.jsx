@@ -11,7 +11,7 @@ const PostPage = () => {
 
   useEffect(() => {
     getPost(id);
-  }, [id]);
+  }, [getPost, id]);
 
   return (
     <>

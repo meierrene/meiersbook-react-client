@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 
 const BASE_URL = `${window.location.origin}/api/v1/posts/`;
 
@@ -91,20 +97,23 @@ const PostProvider = ({ children }) => {
       : document.documentElement.classList.remove('theme-dark');
   }, [isDark]);
 
-  const getPost = async (id) => {
-    if (id === currentPost.id) return;
-    dispatch({ type: 'loading' });
-    try {
-      const res = await fetch(BASE_URL + id);
-      const data = await res.json();
-      dispatch({ type: 'post/loaded', payload: data });
-    } catch {
-      dispatch({
-        type: 'rejected',
-        payload: 'There was en error loading post.',
-      });
-    }
-  };
+  const getPost = useCallback(
+    async (id) => {
+      if (id === currentPost.id) return;
+      dispatch({ type: 'loading' });
+      try {
+        const res = await fetch(BASE_URL + id);
+        const data = await res.json();
+        dispatch({ type: 'post/loaded', payload: data });
+      } catch {
+        dispatch({
+          type: 'rejected',
+          payload: 'There was en error loading post.',
+        });
+      }
+    },
+    [currentPost.id]
+  );
 
   const createPost = async (newPost) => {
     dispatch({ type: 'loading' });

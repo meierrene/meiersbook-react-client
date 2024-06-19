@@ -31,7 +31,7 @@ const Header = () => {
           <ul className={`${styles.navbarNav} navbar-nav`}>
             <li className="nav-item">
               <Link className="nav-link" id="contact" to="/">
-                <Button level="secondary">Contact me</Button>
+                <Button level="secondary">About me</Button>
               </Link>
             </li>
             <li className="nav-item">
